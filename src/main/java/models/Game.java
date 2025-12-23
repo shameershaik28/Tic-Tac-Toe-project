@@ -25,29 +25,40 @@ public class Game {
         return new GameBuilder();
     }
 
+
+
     public GameStatus getGameStatus() {
         return gameStatus;
     }
+
+
 
     public int getCurrentPlayerIdx() {
         return currentPlayerIdx;
     }
 
+
+
     public List<Move> getMoves() {
         return moves;
     }
+
 
     public Board getBoard() {
         return board;
     }
 
+
     public List<Player> getPlayers() {
         return players;
     }
 
+
     public void printBoard() {
         this.board.printBoard();
     }
+
+
 
     public void makeMove() {
         Player player = players.get(currentPlayerIdx);
@@ -69,9 +80,12 @@ public class Game {
         this.currentPlayerIdx = (this.currentPlayerIdx+1) % this.players.size();
     }
 
+
+
     private boolean checkIfWon() {
         return true;
     }
+
 
     public  static class GameBuilder
     {

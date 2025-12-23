@@ -9,6 +9,7 @@ import java.util.List;
 
 public class GameController {
 
+
     public Game createGame(List<Player> playerList) throws InvalidBotCountException {
 
        Game game =  Game.getBuilder()
@@ -17,14 +18,16 @@ public class GameController {
        return game;
     }
 
+
    public GameStatus getGameStatus(Game game){
         return game.getGameStatus();
-
    }
+
 
    public void printBoard(Game game){
         game.printBoard();
    }
+
 
    public void makeMove(Game game){
        game.makeMove();

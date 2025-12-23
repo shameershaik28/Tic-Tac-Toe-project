@@ -10,14 +10,11 @@ public class Cell {
         this.y = y;
     }
 
-    public void print()
-    {
-        if(player != null)
-        {
-            System.out.println(player.getSymbol());
-        }
-        else {
-            System.out.println(" _ ");
+    public void print() {
+        if (player != null) {
+            System.out.print(" " + player.getSymbol() + " ");
+        } else {
+            System.out.print(" _ ");
         }
     }
 
