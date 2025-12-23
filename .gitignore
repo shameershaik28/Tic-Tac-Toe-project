@@ -3,6 +3,12 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+.idea/workspace.xml
+.idea/*
+!.idea/compiler.xml
+!.idea/encodings.xml
+!.idea/vcs.xml
+
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
