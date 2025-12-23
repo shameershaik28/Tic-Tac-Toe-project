@@ -18,6 +18,8 @@ public class Board {
     }
 
     public void printBoard() {
+        System.out.println();
+
         for(List<Cell> row : grid){
             for(Cell cell : row){
                 cell.print();
@@ -29,10 +31,19 @@ public class Board {
 
     public void setPlayer(int key, int value, Player player) {
         Cell cell = this.grid.get(key).get(value);
+
+        if (cell.getPlayer() != null) {
+            throw new IllegalStateException("Cell already occupied");
+        }
+
         cell.setPlayer(player);
     }
 
     public Cell getCell(int x, int y){
         return this.grid.get(x).get(y);
+    }
+
+    public List<List<Cell>> getGrid() {
+        return grid;
     }
 }

@@ -33,24 +33,27 @@ public class TicTacToe {
 This code optionally creates a Bot object based on user input and adds it to the same player list as humans,
 leveraging polymorphism. */
 
-        System.out.println("Are bots going to play? (Y/N");
-        if(input.next().charAt(0) == 'Y')
-        {
-            System.out.println("Enter bot level: (E/M/H)");
-            char level = input.next().charAt(0);
+        System.out.println("Are bots going to play? (Y/N)");
+        char botChoice = Character.toUpperCase(input.next().charAt(0));
 
-            //Default bot level assignment
+        if (botChoice == 'Y') {
+
+            System.out.println("Enter bot level: (E/M/H)");
+            char level = Character.toUpperCase(input.next().charAt(0));
+
+            // Default bot level
             BotLevel botLevel = BotLevel.EASY;
 
-            if(level == 'E')
+            if (level == 'E')
                 botLevel = BotLevel.EASY;
-            else if(level == 'M')
+            else if (level == 'M')
                 botLevel = BotLevel.MEDIUM;
-            else if(level == 'H')
+            else if (level == 'H')
                 botLevel = BotLevel.HARD;
 
-            playerList.add(new Bot("Bot - 1", 'B', botLevel ));
+            playerList.add(new Bot("Bot - 1", 'B', botLevel));
         }
+
 
         /*This loop continuously prints the board and processes player moves through the controller
          until the game reaches a terminal state. */
@@ -62,6 +65,17 @@ leveraging polymorphism. */
           gameController.makeMove(game);
 
         }
+
+       if(gameController.getGameStatus(game)== GameStatus.WON)
+       {
+         Player winner = gameController.getWinner(game);
+           System.out.println(winner.getName() + " with symbol "+ winner.getSymbol()+ " has won.");
+           gameController.printBoard(game);
+       }
+       else
+       {
+           System.out.println("Game has drawn");
+       }
 
 
 

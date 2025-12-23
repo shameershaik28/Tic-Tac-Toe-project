@@ -1,6 +1,8 @@
 package models;
 
 import exceptions.InvalidBotCountException;
+import strategies.winning_strategy.OrderOneWinningStrategy;
+import strategies.winning_strategy.PlayerWonStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ public class Game {
     private GameStatus gameStatus;
     private int currentPlayerIdx;
     private List<Move> moves;
+    private PlayerWonStrategy playerWonStrategy;
 
     private Game(GameBuilder gameBuilder) {
         this.players = gameBuilder.players;
@@ -19,6 +22,7 @@ public class Game {
         this.currentPlayerIdx = 0;
         this.moves = new ArrayList<>();
         this.gameStatus = GameStatus.IN_PROGRESS;
+        this.playerWonStrategy = new OrderOneWinningStrategy(n+1);
     }
 
     public static GameBuilder getBuilder() {
@@ -62,28 +66,26 @@ public class Game {
 
     public void makeMove() {
         Player player = players.get(currentPlayerIdx);
-        Pair<Integer, Integer> pair =  player.makeMove();
+        Pair<Integer, Integer> pair = player.makeMove(this.board);
         // Validate if the cell is empty or not
         this.board.setPlayer(pair.getKey(), pair.getValue(), player);
         Move move = new Move(player, this.board.getCell(pair.getKey(), pair.getValue()));
         this.moves.add(move);
-        if(checkIfWon())
-        {
+
+        if(playerWonStrategy.checkIfWon(this.board.getCell(pair.getKey(), pair.getValue()))){ // check if someone has won
             this.gameStatus = GameStatus.WON;
             return;
         }
-
         if(moves.size() == (players.size()+1) * (players.size()+1)){
             this.gameStatus = GameStatus.DRAW;
             return;
         }
         this.currentPlayerIdx = (this.currentPlayerIdx+1) % this.players.size();
+
     }
 
-
-
-    private boolean checkIfWon() {
-        return true;
+    public Player getWinner() {
+        return this.players.get(currentPlayerIdx);
     }
 
 
